@@ -98,8 +98,68 @@ function displayData(data, scrapeText, scrapeImages, scrapeLinks) {
       }
     }
 
-    // Display the combined output in the popup
     dataElement.textContent = output;
   }
 }
 // document.addEventListener("DOMContentLoaded", fetchDataFromContentScript);
+// Function to download text data as a .txt file
+function downloadTextData() {
+  const textData = document.getElementById("data").textContent;
+  if (!textData.includes("No text data found")) {
+    const blob = new Blob([textData], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "textData.txt";
+    link.click();
+    URL.revokeObjectURL(url);
+  } else {
+    alert("No text data available to download.");
+  }
+}
+
+// Function to download images from URLs
+function downloadImages() {
+  const textContent = document.getElementById("data").textContent;
+  const urls = textContent.match(/https?:\/\/\S+/g); // This regex assumes URLs start with http and captures until a space or newline
+  if (urls && urls.length > 0) {
+    urls.forEach((url) => {
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = ""; // This will prompt the browser to download the image; might not work on all browsers or require CORS headers
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  } else {
+    alert("No image URLs available to download.");
+  }
+}
+
+// Function to download link data as a .txt file
+function downloadLinkData() {
+  const textContent = document.getElementById("data").textContent;
+  const urls = textContent.match(/https?:\/\/\S+/g); // This regex finds URLs starting with http and captures until a space or newline
+  if (urls && urls.length > 0) {
+    const blob = new Blob([urls.join("\n")], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "linkData.txt";
+    link.click();
+    URL.revokeObjectURL(url);
+  } else {
+    alert("No link URLs available to download.");
+  }
+}
+
+// Event listeners for download buttons
+document
+  .getElementById("downloadTextButton")
+  .addEventListener("click", downloadTextData);
+document
+  .getElementById("downloadImagesButton")
+  .addEventListener("click", downloadImages);
+document
+  .getElementById("downloadLinksButton")
+  .addEventListener("click", downloadLinkData);
