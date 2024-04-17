@@ -9,7 +9,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
   // Handling different types of messages
   if (message.action === "scrapeData") {
-    console.log("Scraped Data:", message.data);
+    console.log("Scraped Data:", message.data.textData);
+    console.log("Scraped Image URLs:", message.data.imageData);
     // Possibly store this data or handle differently
     sendResponse({ received: true, data: message.data });
   }

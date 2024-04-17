@@ -36,6 +36,14 @@
         <p id="data">Scraped data will appear here</p>
     </div>
 
+    <div id="options">
+        <label><input type="radio" name="scrapeOption" id="scrapeText" value="text" checked> Scrape Text</label><br>
+        <label><input type="radio" name="scrapeOption" id="scrapeImages" value="images"> Scrape Images</label><br>
+        <label><input type="radio" name="scrapeOption" id="scrapeLinks" value="links"> Scrape Links</label><br>
+        
+    </div>
+    <button id="scrapeButton">Scrape Data</button>
+
     <!-- Include your extension's JavaScript file -->
     <script src="popup.js"></script>
 </body>
