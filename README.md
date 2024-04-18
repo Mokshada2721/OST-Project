@@ -22,7 +22,7 @@ Follow these steps to install the web scraping extension:
 1. Open your web browser and navigate to a website you want to scrape.
 2. Click on the web scraping extension button in your browser toolbar.
 3. The extension will extract images, text, and links from the website.
-4. View the scraped data in the extension's frontend interface.
+4. View the scraped data in the extension's frontend interface
 
 ## Contributing
 
